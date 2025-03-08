@@ -17,5 +17,5 @@ public class Rider {
     public String getVehicleModel() { return vehicleModel; }
     public void setVehicleModel(String vehicleModel) { this.vehicleModel = vehicleModel; }
     public String getVehicleNumber() { return vehicleNumber; }
-    public void setVehicleNumber(String vehicleNumber) { this.vehicleNumber = vehicleNumber; }
+    public void setVehicleNumber(String vehicleNumber) { this.vehicleNumber = vehicleNumber; }
 }

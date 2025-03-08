@@ -1,6 +1,5 @@
 package com.megacityCab.model;
 
-
 public class User {
     public enum Role { USER, RIDER, ADMIN;
 
@@ -48,8 +47,7 @@ public class User {
         try {
             this.role = Role.valueOf(roleStr.toUpperCase());
         } catch (IllegalArgumentException e) {
-        	this.role = Role.USER; 
-           // this.role = Role.USER; // Or throw an error
-        }
-    }
- }
+            this.role = Role.USER; // Or throw an error
+        }
+    }
+}

@@ -1,7 +1,7 @@
 package com.megacityCab.dao;
 
 import com.megacityCab.model.Rider;
-import  com.megacityCab.utils.DBUtil;
+import com.megacityCab.utils.DBUtil;
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
