@@ -13,12 +13,14 @@
 <html>
 <head>
     <title>Rider-Dashboard</title>
-    <link rel="stylesheet" href="${pageContext.request.contextPath}/css/styles.css">
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/css/user.css">
+
 </head>
 <body>
     <c:if test="${empty sessionScope.user || sessionScope.user.role ne 'RIDER'}">
         <c:redirect url="login.jsp"/>
     </c:if>
+    
     
      <c:if test="${not empty param.success}">
     <div class="alert success">
@@ -46,12 +48,23 @@
     </div>
 </c:if>
 
-    <h1>Welcome Rider: <c:out value="${sessionScope.user.name}"/></h1>
-     <a href="${pageContext.request.contextPath}/logout">Logout</a>
     
-    <div>
+     
+     
+     <div class="profile-section">
+
+<%--     <a href="${pageContext.request.contextPath}/logout" class="login.jsp">Logout</a> --%>
+     
+            <div class="admin-name">
+                Welcome Rider: <c:out value="${sessionScope.user.name}"/>
+            </div>
+            <a href="${pageContext.request.contextPath}/logout" class="logout-link">Logout</a>
+        </div>
+    
+    <div >
+    
         <c:if test="${not empty rider}">
-            <table id="vehicleDetails">
+            <table class="vehicleDetails">
                 <tr>
                     <th>Vehicle Type</th>
                     <th>Vehicle Model</th>
@@ -70,7 +83,7 @@
 
     <div class="rider-rides">
         <h2>Your Assigned Rides</h2>
-        <table>
+        <table class="rider-rides">
             <tr>
                 <th>Ride ID</th>
                 <th>Pickup</th>

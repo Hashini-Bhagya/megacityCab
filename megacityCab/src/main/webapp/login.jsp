@@ -5,11 +5,12 @@
 <head>
     <title>Login</title>
     <link rel="stylesheet" href="${pageContext.request.contextPath}/css/styles.css">
+
 </head>
 <body>
+ 
     <div class="login-container">
-        <h2>Login</h2>
-        
+      
         <c:if test="${not empty param.error}">
             <div class="alert error">Invalid credentials</div>
         </c:if>
@@ -17,6 +18,11 @@
         <c:if test="${not empty param.registered}">
             <div class="alert success">Registration successful! Please login.</div>
         </c:if>
+        
+       <div class="card animated">
+          <div class="form-header">   
+          <h2 class="mb-3">MEGA CITY CAB </h2>
+        </div>
         
         <form action="login" method="post">
             <div class="form-group">
@@ -28,8 +34,11 @@
                 <input type="password" name="password" required>
             </div>
             <button type="submit">Login</button>
+            <p>Don't have an account? <a href="register.jsp">Register here</a></p>
         </form>
-        <p>New user? <a href="register.jsp">Register here</a></p>
+      
     </div>
+    </div>
+      
 </body>
 </html>

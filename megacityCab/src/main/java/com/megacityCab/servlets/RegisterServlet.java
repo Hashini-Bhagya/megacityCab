@@ -38,7 +38,7 @@ public class RegisterServlet extends HttpServlet {
         user.setPhone(phone);
         user.setEmail(email);
         user.setPasswordHash(SecurityUtil.hashPassword(password));
-        user.setRole(role != null ? role.toUpperCase() : "USER");
+        user.setRoleFromString(role);
 
         UserDAO userDAO = new UserDAO();
         try {
@@ -51,6 +51,7 @@ public class RegisterServlet extends HttpServlet {
                     rider.setVehicleType(vehicleType);
                     rider.setVehicleModel(vehicleModel);
                     rider.setVehicleNumber(vehicleNumber);
+                    rider.setPhone(phone);
                     new RiderDAO().createRider(rider);
                 }
                 response.sendRedirect("login.jsp?registered=true");
