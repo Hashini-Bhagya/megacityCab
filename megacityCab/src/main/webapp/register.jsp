@@ -1,18 +1,33 @@
-<%@ page contentType="text/html;charset=UTF-8" %>
+ <%@ page contentType="text/html;charset=UTF-8" %>
 <!DOCTYPE html>
 <html>
 <head>
     <title>Register</title>
     <link rel="stylesheet" href="${pageContext.request.contextPath}/css/styles.css">
-    <script src="${pageContext.request.contextPath}/js/scripts.js"></script>
+<!-- <!--   Add below Bootstrap links -->
+<!-- <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet"> -->
+<!-- <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script> -->
+<!-- Add Font Awesome -->
+<!-- <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css"> -->
+<!-- Google Fonts -->
+<!-- <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet"> --> 
+    <script src="${pageContext.request.contextPath}/js/scripts.js"></script>   
 </head>
 <body>
     <div class="register-container">
-        <h2>Register</h2>
+<!--         <h2>Register</h2>  -->
+
+    <div class="card animated">
+        <div class="form-header">
+            
+            <h2 class="mb-3">Create Account</h2>
+        </div>
+        
         <form action="register" method="post">
             <div class="role-selection">
                 <label>
-                    <input type="radio" name="role" value="USER" id="user" checked> User
+                    <input type="radio" name="role" value="USER" id="user" checked> Passenger
+                    
                 </label>
                 <label>
                     <input type="radio" name="role" value="Rider" id="rider"> Rider
@@ -68,7 +83,11 @@
             </div>
 
             <button type="submit">Register</button>
+            <p>Have an account? <a href="login.jsp">Login</a></p>
         </form>
-    </div>
+    </div>  
+  </div>  
+
+
 </body>
 </html>

@@ -1,0 +1,183 @@
+/* User Dashboard Custom CSS */
+
+body {
+    font-family: 'Poppins', sans-serif;
+    background: #f8f9fa;
+    color: #343a40;
+    margin: 0;
+    padding: 0;
+}
+
+/* Header Section */
+.profile-section {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background: linear-gradient(135deg, #cdde12 ,  #6f4e37 );
+    color: white;
+    padding: 20px 40px;
+    border-bottom: 4px solid rgb(0, 128, 0);
+}
+
+.admin-name {
+    font-size: 1.5rem;
+    font-weight: 600;
+}
+
+.logout-link {
+    text-decoration: none;
+    color: white;
+    font-weight: 500;
+    background-color: #f05b3a;
+    padding: 8px 20px;
+    border-radius: 8px;
+    transition: background 0.3s;
+}
+
+.logout-link:hover {
+    background-color: #4e342e;
+}
+
+/* Form Section */
+.booking-section {
+    max-width: 800px;
+    margin: 40px auto;
+    padding: 30px;
+    background: white;
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
+    border-radius: 16px;
+}
+
+.booking-section h2 {
+    text-align: center;
+    color: #5d4037;
+    margin-bottom: 30px;
+    font-weight: 600;
+}
+
+.form-group label {
+    font-weight: 500;
+    margin-bottom: 10px;
+}
+
+.form-group input,
+.form-group select {
+    width: 100%;
+    padding: 12px;
+    margin-bottom: 20px;
+    border: 2px solid #b0a292;
+    border-radius: 10px;
+    background: #f9f9f9;
+    transition: border 0.3s;
+}
+
+.form-group input:focus,
+.form-group select:focus {
+    border: 2px solid #6f4e37;
+    outline: none;
+}
+
+button[type="submit"] {
+    display: block;
+    width: 100%;
+    padding: 14px;
+    background: #6f4e37;
+    color: white;
+    border: none;
+    border-radius: 12px;
+    font-size: 1rem;
+    transition: background 0.3s;
+}
+
+button[type="submit"]:hover {
+    background: #4e342e;
+}
+
+/* Table Section */
+.upcoming-rides {
+    max-width: 95%;
+    margin: 40px auto;
+}
+
+.rides-table , .rider-rides , .vehicleDetails{
+    width: 100%;
+    border-collapse: separate;
+    border-spacing: 0 10px;
+}
+
+.rides-table th, .rides-table td  , .rider-rides th , .rider-rides td , .vehicleDetails th , .vehicleDetails td {
+    padding: 15px;
+    text-align: center;
+    border-bottom: 2px solid #a4edaf;
+}
+
+.rides-table th , .rider-rides th , .vehicleDetails th {
+    background: #076144;
+    color: white;
+    font-weight: 600;
+}
+
+.rides-table tr , .rider-rides tr , .vehicleDetails tr {
+    background: #a4edaf;
+    border-radius: 12px;
+}
+
+.rides-table tr:hover , .rider-rides tr:hover , .vehicleDetails tr:hover {
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+}
+
+/* Rider Modal */
+.modal {
+    display: none;
+    position: fixed;
+    z-index: 1050;
+    padding-top: 100px;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    overflow: auto;
+    background-color: rgba(0, 0, 0, 0.5);
+}
+
+.modal-content {
+    background: white;
+    margin: auto;
+    padding: 30px;
+    border-radius: 20px;
+    max-width: 600px;
+}
+
+.modal h3 {
+    margin-bottom: 20px;
+    color: #6f4e37;
+}
+
+.modal-body p {
+    margin: 10px 0;
+    font-size: 1rem;
+}
+
+.close {
+    color: #6f4e37;
+    float: right;
+    font-size: 32px;
+    font-weight: bold;
+}
+
+.close:hover, .close:focus {
+    color: #4e342e;
+    cursor: pointer;
+}
+
+/* Utility Classes */
+.alert {
+    padding: 15px;
+    border-radius: 10px;
+    margin: 20px 0;
+}
+
+.error {
+    background: #ff5252;
+    color: white;
+}
