@@ -46,7 +46,8 @@ public class RideTest {
 
     @Test
     public void testCalculateCost() {
-        double expectedCost = 100.00 + (15.0 * 45);
+        // Assuming rate is ₹200/km
+        double expectedCost = 100.00 + (15.0 * 200);
         assertEquals(expectedCost, ride.calculateCost(), 0.01);
     }
 

@@ -1,120 +1,130 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
+<%@ page contentType="text/html;charset=UTF-8" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <!DOCTYPE html>
 <html>
 <head>
-<meta charset="UTF-8">
-<link rel="stylesheet" href="${pageContext.request.contextPath}/css/styles.css">
-<title>Insert title here</title>
-
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Panel</title>
+    
+    <!-- Bootstrap 5 CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    
     <style>
-      .nav-bar {
-        background: #2c3e50;
-        padding: 1rem 2rem;
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
-        box-shadow: 0 2px 5px rgba(0,0,0,0.1);
-    }
-
-    .nav-links {
-        display: flex;
-        gap: 2rem;
-    }
-
-    .nav-link {
-        color: #ecf0f1;
-        text-decoration: none;
-        padding: 0.5rem 1rem;
-        border-radius: 4px;
-        transition: all 0.3s ease;
-    }
-
-    .nav-link:hover {
-        background-color: #34495e;
-        transform: translateY(-2px);
-    }
-
-    .profile-section {
-        display: flex;
-        align-items: center;
-        gap: 1.5rem;
-        color: #ecf0f1;
-    }
-
-    .admin-name {
-        font-weight: 500;
-        font-size: 0.9rem;
-    }
-
-    .logout-link {
-        color: #ecf0f1;
-        text-decoration: none;
-        padding: 0.5rem 1rem;
-        border-radius: 4px;
-        background-color: #e74c3c;
-        transition: all 0.3s ease;
-    }
-
-    .logout-link:hover {
-        background-color: #c0392b;
-        transform: translateY(-2px);
-    }
-
-    .error {
-        color: #e74c3c;
-        background-color: #f8d7da;
-        padding: 0.75rem;
-        border-radius: 4px;
-        margin: 1rem 0;
-        border: 1px solid #f5c6cb;
-    }
-
-    /* Responsive Design */
-    @media (max-width: 768px) {
-        .nav-bar {
-            flex-direction: column;
-            gap: 1rem;
-            padding: 1rem;
+        .admin-navbar {
+            background: linear-gradient(135deg, #2c3e50, #3498db);
+            box-shadow: 0 2px 15px rgba(0,0,0,0.1);
+            padding: 0.8rem 1rem;
         }
         
-        .nav-links {
-            flex-wrap: wrap;
-            justify-content: center;
+        .nav-link {
+            color: rgba(255,255,255,0.9) !important;
+            transition: all 0.3s ease;
+            margin: 0 0.8rem;
+            position: relative;
         }
         
-        .profile-section {
-            flex-direction: column;
-            gap: 0.5rem;
+        .nav-link:hover,
+        .nav-link.active {
+            color: #fff !important;
+            transform: translateY(-2px);
         }
-    }
-        .data-table { width: 100%; border-collapse: collapse; margin: 1rem 0;  }
-		.data-table th, .data-table td { padding: 0.75rem; border: 1px solid #ddd; }
-		.data-table tr:nth-child(even) { background-color: #f9f9f9; }
-		.error { color: red; padding: 1rem; border: 1px solid red; margin: 1rem 0; }
-		.search-box { margin: 1rem 0; }
+        
+        .nav-link.active::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 100%;
+            height: 2px;
+            background: #fff;
+            animation: underline 0.3s ease;
+        }
+        
+        @keyframes underline {
+            from { width: 0 }
+            to { width: 100% }
+        }
+        
+        .brand-text {
+            font-weight: 600;
+            letter-spacing: 0.5px;
+        }
+        
+        .logout-btn {
+            background: rgba(255,255,255,0.1);
+            border: 1px solid rgba(255,255,255,0.2);
+            transition: all 0.3s ease;
+        }
+        
+        .logout-btn:hover {
+            background: rgba(255,255,255,0.2);
+            transform: translateY(-2px);
+        }
     </style>
 </head>
 <body>
-	  <div class="nav-bar">
-        <div class="nav-links">
-            <a class="nav-link" href="adminDashboard">Manage Rides</a>
-            <a class="nav-link" href="adminUsers">Manage Users</a>
-            <a class="nav-link" href="adminRiders">View Riders</a>
-        </div>
-
-        <div class="profile-section">
-            <div class="admin-name">
-                ADMIN: <c:out value="${sessionScope.user.name}"/>
+    <nav class="navbar navbar-expand-lg admin-navbar">
+        <div class="container-fluid">
+            <a class="navbar-brand brand-text text-white" href="#">
+                <i class="fas fa-taxi me-2"></i>Megacity Admin
+            </a>
+            
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" 
+                    data-bs-target="#adminNav" aria-controls="adminNav" 
+                    aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon text-white"></span>
+            </button>
+            
+            <div class="collapse navbar-collapse" id="adminNav">
+                <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                    <li class="nav-item">
+                        <a class="nav-link ${param.page == 'dashboard' ? 'active' : ''}" 
+                           href="adminDashboard">
+                           <i class="fas fa-road me-1"></i>Manage Rides
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link ${param.page == 'users' ? 'active' : ''}" 
+                           href="adminUsers">
+                           <i class="fas fa-users-cog me-1"></i>Manage Users
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link ${param.page == 'riders' ? 'active' : ''}" 
+                           href="adminRiders">
+                           <i class="fas fa-motorcycle me-1"></i>View Riders
+                        </a>
+                    </li>
+                </ul>
+                
+                <div class="d-flex align-items-center">
+                    <span class="text-white me-3">
+                        <i class="fas fa-user-shield me-2"></i>
+                        <c:out value="${sessionScope.user.name}"/>
+                    </span>
+                    <a href="${pageContext.request.contextPath}/logout" 
+                       class="btn btn-sm logout-btn text-white">
+                       <i class="fas fa-sign-out-alt me-2"></i>Logout
+                    </a>
+                </div>
             </div>
-            <a href="${pageContext.request.contextPath}/logout" class="logout-link">Logout</a>
         </div>
-    </div>
+    </nav>
 
+    <!-- Error Message -->
     <c:if test="${not empty error}">
-        <div class="error"><c:out value="${error}"/></div>
+        <div class="alert alert-danger alert-dismissible fade show m-3">
+            <i class="fas fa-exclamation-circle me-2"></i>
+            <c:out value="${error}"/>
+            <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+        </div>
     </c:if>
+
+    <!-- Bootstrap JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
 </body>
 </html>

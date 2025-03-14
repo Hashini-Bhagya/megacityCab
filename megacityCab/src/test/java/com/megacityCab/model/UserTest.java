@@ -6,85 +6,65 @@ import static org.junit.jupiter.api.Assertions.*;
 public class UserTest {
 
     @Test
-    public void testId() {
+    void testDefaultRole() {
         User user = new User();
-        user.setId(1);
-        assertEquals(1, user.getId(), "User ID should be 1");
+        assertEquals(User.Role.USER, user.getRole(), "Default role should be USER");
     }
 
     @Test
-    public void testName() {
+    void testSetRole() {
         User user = new User();
-        user.setName("John Doe");
-        assertEquals("John Doe", user.getName(), "User name should be 'John Doe'");
+        
+        // Valid role
+        user.setRole(User.Role.ADMIN);
+        assertEquals(User.Role.ADMIN, user.getRole());
+        
+        // Null role (should default to USER)
+        user.setRole(null);
+        assertEquals(User.Role.USER, user.getRole());
     }
 
     @Test
-    public void testNic() {
+    void testSetRoleFromString() {
         User user = new User();
-        user.setNic("123456789V");
-        assertEquals("123456789V", user.getNic(), "User NIC should be '123456789V'");
-    }
 
-    @Test
-    public void testPhone() {
-        User user = new User();
-        user.setPhone("123-456-7890");
-        assertEquals("123-456-7890", user.getPhone(), "User phone number should be '123-456-7890'");
-    }
-
-    @Test
-    public void testEmail() {
-        User user = new User();
-        user.setEmail("johndoe@example.com");
-        assertEquals("johndoe@example.com", user.getEmail(), "User email should be 'johndoe@example.com'");
-    }
-
-    @Test
-    public void testPasswordHash() {
-        User user = new User();
-        user.setPasswordHash("hashedPassword123");
-        assertEquals("hashedPassword123", user.getPasswordHash(), "Password hash should be 'hashedPassword123'");
-    }
-
-    @Test
-    public void testDefaultRole() {
-        User user = new User();
-        assertEquals(User.Role.USER, user.getRole(), "Default role should be 'USER'");
-    }
-
-    @Test
-    public void testSetRole() {
-        User user = new User();
-        user.setRole(User.Role.RIDER);
-        assertEquals(User.Role.RIDER, user.getRole(), "Role should be set to 'RIDER'");
-    }
-
-    @Test
-    public void testSetRoleFromStringValid() {
-        User user = new User();
+        // Valid roles (case-insensitive)
         user.setRoleFromString("admin");
-        assertEquals(User.Role.ADMIN, user.getRole(), "Role should be set to 'ADMIN'");
-    }
+        assertEquals(User.Role.ADMIN, user.getRole());
 
-    @Test
-    public void testSetRoleFromStringInvalid() {
-        User user = new User();
-        user.setRoleFromString("invalidRole");
-        assertEquals(User.Role.USER, user.getRole(), "Role should default to 'USER' for invalid input");
-    }
+        user.setRoleFromString("RIDER");
+        assertEquals(User.Role.RIDER, user.getRole());
 
-    @Test
-    public void testSetRoleFromStringNull() {
-        User user = new User();
-        user.setRoleFromString(null);
-        assertEquals(User.Role.USER, user.getRole(), "Role should default to 'USER' when input is null");
-    }
+        // Invalid/unknown role
+        user.setRoleFromString("INVALID_ROLE");
+        assertEquals(User.Role.USER, user.getRole());
 
-    @Test
-    public void testSetRoleFromStringEmpty() {
-        User user = new User();
+        // Empty/null input
         user.setRoleFromString("");
-        assertEquals(User.Role.USER, user.getRole(), "Role should default to 'USER' for empty input");
+        assertEquals(User.Role.USER, user.getRole());
+
+        user.setRoleFromString(null);
+        assertEquals(User.Role.USER, user.getRole());
+    }
+
+    @Test
+    void testSettersAndGetters() {
+        User user = new User();
+
+        user.setId(123);
+        user.setName("John Doe");
+        user.setNic("987654321X");
+        user.setPhone("0771234567");
+        user.setEmail("john@example.com");
+        user.setPasswordHash("hashed_123");
+
+        assertAll("Verify all setters/getters",
+            () -> assertEquals(123, user.getId()),
+            () -> assertEquals("John Doe", user.getName()),
+            () -> assertEquals("987654321X", user.getNic()),
+            () -> assertEquals("0771234567", user.getPhone()),
+            () -> assertEquals("john@example.com", user.getEmail()),
+            () -> assertEquals("hashed_123", user.getPasswordHash())
+        );
     }
 }
