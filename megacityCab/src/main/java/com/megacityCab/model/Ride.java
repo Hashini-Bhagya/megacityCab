@@ -9,7 +9,7 @@ public class Ride {
     public enum Status { REQUESTED, PENDING, ASSIGNED, COMPLETED }
     
     public enum SelectedVehicle { 
-        MOTOR_BIKE(30), THREE_WHEEL(35), CAR(45), VAN(60), TRUCK(80);
+        MOTOR_BIKE(100), THREE_WHEEL(150), CAR(200), VAN(250), TRUCK(500);
         
         private final double ratePerKm;
         

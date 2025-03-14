@@ -10,6 +10,7 @@ import java.sql.SQLException;
 
 public class DBUtil {
 	private static DataSource dataSource;
+	
  
  static {
      try {
