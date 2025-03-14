@@ -13,7 +13,12 @@
 <html>
 <head>
     <title>Rider-Dashboard</title>
-    <link rel="stylesheet" href="${pageContext.request.contextPath}/css/user.css">
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/css/rider.css">
+       <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css">
+  
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
 
 </head>
 <body>
@@ -51,39 +56,59 @@
     
      
      
-     <div class="profile-section">
-
-<%--     <a href="${pageContext.request.contextPath}/logout" class="login.jsp">Logout</a> --%>
-     
+     <div class="profile-section">     
             <div class="admin-name">
-                Welcome Rider: <c:out value="${sessionScope.user.name}"/>
+            <i class="fas fa-user-check icon-brown"></i>
+                Hi ,  <c:out value="${sessionScope.user.name}"/>
             </div>
             <a href="${pageContext.request.contextPath}/logout" class="logout-link">Logout</a>
         </div>
     
-    <div >
-    
-        <c:if test="${not empty rider}">
-            <table class="vehicleDetails">
-                <tr>
-                    <th>Vehicle Type</th>
-                    <th>Vehicle Model</th>
-                    <th>Vehicle Number</th>
-                    <th>Phone Number</th>
-                </tr>
-                <tr>
-                    <td><c:out value="${rider.vehicleType}"/></td>
-                    <td><c:out value="${rider.vehicleModel}"/></td>
-                    <td><c:out value="${rider.vehicleNumber}"/></td>
-                    <td><c:out value="${rider.phone}"/></td>
-                </tr>
-            </table>
-        </c:if>
-    </div>   
-
-    <div class="rider-rides">
-        <h2>Your Assigned Rides</h2>
-        <table class="rider-rides">
+    <div class="container-fluid rider-container">
+    <div class="row">
+        <!-- Vehicle Details Card -->
+        <div class="col-md-4">
+            <div class="vehicle-card animate__animated animate__fadeInLeft">
+                <c:if test="${not empty rider}">
+                    <div class="vehicle-header">
+                        <i class="fas fa-motorcycle"></i>
+                        <h3>Your Vehicle Details</h3>
+                    </div>
+                    <div class="vehicle-body">
+                        <div class="detail-item">
+                            <i class="fas fa-car-side"></i>
+                            <span>Type:</span>
+                            <c:out value="${rider.vehicleType}"/>
+                        </div>
+                        <div class="detail-item">
+                            <i class="fas fa-tag"></i>
+                            <span>Model:</span>
+                            <c:out value="${rider.vehicleModel}"/>
+                        </div>
+                        <div class="detail-item">
+                            <i class="fas fa-hashtag"></i>
+                            <span>Number:</span>
+                            <c:out value="${rider.vehicleNumber}"/>
+                        </div>
+                        <div class="detail-item">
+                            <i class="fas fa-phone"></i>
+                            <span>Contact:</span>
+                            <c:out value="${rider.phone}"/>
+                        </div>
+                    </div>
+                </c:if>
+            </div>
+        </div>
+        
+    <div class="col-md-8">
+            <div class="rides-section animate__animated animate__fadeInRight">
+                <h2 class="section-title">
+                    <i class="fas fa-list-check"></i>
+                    Assigned Rides
+                </h2>
+                
+        <div class="table-responsive">
+                    <table class="rides-table table table-hover">
             <tr>
                 <th>Ride ID</th>
                 <th>Pickup</th>
@@ -102,18 +127,26 @@
                     <td><c:out value="${ride.selectedVehicle}"/></td>
                     <td><fmt:formatNumber value="${ride.distance}" pattern="#0.0"/></td>
             		<td>LKR <fmt:formatNumber value="${ride.cost}" pattern="#,##0.00"/></td>
-                    <td><c:out value="${ride.status}"/></td>
+            		<td><c:out value="${ride.status}"/></td>
                     <td>
-                        <c:if test="${ride.status eq 'ASSIGNED'}">
-                            <form action="${pageContext.request.contextPath}/completeRide" method="post">
-                                <input type="hidden" name="rideId" value="${ride.rideId}">
-                                <button type="submit">Mark Complete</button>
-                            </form>
+                    
+                   <c:if test="${ride.status eq 'ASSIGNED'}">
+                                <form action="${pageContext.request.contextPath}/completeRide" method="post">
+                                    <input type="hidden" name="rideId" value="${ride.rideId}">
+                                    <button type="submit" class="btn-complete">
+                                        <i class="fas fa-check-circle"></i>
+                                        Complete Ride
+                                    </button>
+                                    </form>
                         </c:if>
                     </td>
                 </tr>
             </c:forEach>
         </table>
+    </div>
+    </div>
+    </div>
+    </div>
     </div>
     
    
